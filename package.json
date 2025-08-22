@@ -5,7 +5,7 @@
   "scripts": {
     "-": "--------------------------- ⭐️ BASE ⭐️ -------------------------------",
     "android": "yarn android:prod && yarn android:stg && yarn android:dev",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --verbose",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",

@@ -2378,6 +2378,8 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
+  - RNFS2 (3.3.4):
+    - React-Core
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
 
@@ -2458,6 +2460,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeOpenAI (from `../node_modules/react-native-openai`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - RNFS2 (from `../node_modules/react-native-fs2`)
   - SocketRocket (~> 0.7.1)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -2618,6 +2621,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-openai"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNFS2:
+    :path: "../node_modules/react-native-fs2"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -2698,6 +2703,7 @@ SPEC CHECKSUMS:
   ReactCommon: 116d6ee71679243698620d8cd9a9042541e44aa6
   ReactNativeOpenAI: e62b83a40b86f87b49832b52af4a074ae8f8a2e6
   RNCAsyncStorage: 29f0230e1a25f36c20b05f65e2eb8958d6526e82
+  RNFS2: 7ef61bb4ab9d3e5c9952be1b144e7ff8401a3018
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 00013dd9cde63a2d98e8002fcc4f5ddb66c10782
 

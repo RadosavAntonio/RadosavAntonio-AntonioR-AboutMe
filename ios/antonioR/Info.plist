@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BUNDLE_ID</key>
+	<string>com.antonioR.aboutMe</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -22,8 +24,23 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>REVERSED_CLIENT_ID</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.247234622903-6ca1pfmr35gh3rttaabprghp606ecj5u</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>GOOGLE_API_KEY</key>
+	<string>AIzaSyAtFdhLmQCT77kxgMVM8D4CscvlSJxiv3M</string>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:247234622903:ios:f40d5f4f1901d0c6a7a432</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -35,8 +52,18 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>PROJECT_ID</key>
+	<string>antonior-aboutme</string>
 	<key>RCTNewArchEnabled</key>
 	<false/>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.247234622903-6ca1pfmr35gh3rttaabprghp606ecj5u</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+		<string>background-fetch</string>
+		<string>fetch</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>

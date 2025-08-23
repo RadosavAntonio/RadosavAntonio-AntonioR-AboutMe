@@ -6,7 +6,7 @@ import {
   sendMessage,
 } from '../../services/llamaService'
 import { generateUniqueId } from '../../utils/generativTools/generateUniqueId'
-import { ChatInterface, Message } from '../ChatInterface'
+import { ChatInterface, Message } from './ChatInterface'
 
 const AiChatInit = (): JSX.Element => {
   const [messages, setMessages] = useState<Message[]>([])

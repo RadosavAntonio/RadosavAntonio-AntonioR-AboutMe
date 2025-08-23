@@ -1,10 +1,21 @@
+import { getApps } from '@react-native-firebase/app'
 import React, { JSX, memo, useEffect } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
-import { AiChat } from '../components/aiChat/aiChat'
+import PhoneAuth from '../components/auth/phoneAuth'
 
 const AppMainInit = (): JSX.Element => {
   useEffect(() => {
+    // Check Firebase initialization
+    const apps = getApps()
+    console.log(
+      'Firebase apps:',
+      apps.length > 0 ? 'initialized' : 'not initialized',
+    )
+    if (apps.length > 0) {
+      console.log('Default app name:', apps[0].name)
+    }
+
     // init reactotron
     if (__DEV__) {
       import('../../ReactotronConfig')
@@ -14,7 +25,8 @@ const AppMainInit = (): JSX.Element => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <AiChat />
+        <Text>Firebase Phone Auth Test</Text>
+        <PhoneAuth />
       </SafeAreaView>
     </SafeAreaProvider>
   )

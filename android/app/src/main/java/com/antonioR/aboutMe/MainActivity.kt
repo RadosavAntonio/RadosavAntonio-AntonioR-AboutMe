@@ -1,4 +1,4 @@
-package com.antonior
+package com.antonioR.aboutMe
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

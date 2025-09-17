@@ -54,7 +54,7 @@ PODS:
   - hermes-engine (0.81.0):
     - hermes-engine/Pre-built (= 0.81.0)
   - hermes-engine/Pre-built (0.81.0)
-  - llama-rn (0.6.8):
+  - llama-rn (0.6.9):
     - React-Core
   - RCT-Folly (2024.11.18.00):
     - boost
@@ -1771,7 +1771,7 @@ PODS:
     - react-native-config/App (= 1.5.6)
   - react-native-config/App (1.5.6):
     - React-Core
-  - react-native-safe-area-context (5.6.0):
+  - react-native-safe-area-context (5.6.1):
     - React-Core
   - React-NativeModulesApple (0.81.0):
     - boost
@@ -2282,15 +2282,72 @@ PODS:
   - RecaptchaInterop (101.0.0)
   - RNCAsyncStorage (2.2.0):
     - React-Core
-  - RNFBApp (23.1.0):
+  - RNFBApp (23.1.1):
     - Firebase/CoreOnly (= 12.1.0)
     - React-Core
-  - RNFBAuth (23.1.0):
+  - RNFBAuth (23.1.1):
     - Firebase/Auth (= 12.1.0)
     - React-Core
     - RNFBApp
   - RNFS2 (3.3.4):
     - React-Core
+  - RNGestureHandler (2.28.0):
+    - boost
+    - DoubleConversion
+    - fast_float
+    - fmt
+    - glog
+    - hermes-engine
+    - RCT-Folly
+    - RCT-Folly/Fabric
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - SocketRocket
+    - Yoga
+  - RNScreens (4.16.0):
+    - boost
+    - DoubleConversion
+    - fast_float
+    - fmt
+    - glog
+    - hermes-engine
+    - RCT-Folly
+    - RCT-Folly/Fabric
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-RCTImage
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - SocketRocket
+    - Yoga
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
 
@@ -2374,11 +2431,13 @@ DEPENDENCIES:
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - RNFS2 (from `../node_modules/react-native-fs2`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNScreens (from `../node_modules/react-native-screens`)
   - SocketRocket (~> 0.7.1)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - Firebase
     - FirebaseAppCheckInterop
     - FirebaseAuth
@@ -2549,6 +2608,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/auth"
   RNFS2:
     :path: "../node_modules/react-native-fs2"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
+  RNScreens:
+    :path: "../node_modules/react-native-screens"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -2569,7 +2632,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   GTMSessionFetcher: 02d6e866e90bc236f48a703a041dfe43e6221a29
   hermes-engine: e7491a2038f2618c8cd444ed411a6deb350a3742
-  llama-rn: 24c6fc1531afdd5223d586ee260a78747e0c9161
+  llama-rn: 34654c4c28209eb29eba9446e9bcafeaf2c05259
   RCT-Folly: 846fda9475e61ec7bcbf8a3fe81edfcaeb090669
   RCTDeprecation: 0735ab4f6b3ec93a7f98187b5da74d7916e2cf4c
   RCTRequired: 8fcc7801bfc433072287b0f24a662e2816e89d0c
@@ -2604,7 +2667,7 @@ SPEC CHECKSUMS:
   React-Mapbuffer: ed316571f8a6368a044c166dd62db3ff9a19ade9
   React-microtasksnativemodule: 7349a9210ff1fe97f54025fbda2496ed9a2d43cd
   react-native-config: f1dde39f8468ad922fc7e8bd4308c8e6223d5ee8
-  react-native-safe-area-context: 12c7daa0ea4fa4eeb513fc273fac6b47aa332bd6
+  react-native-safe-area-context: 2243039f43d10cb1ea30ec5ac57fc6d1448413f4
   React-NativeModulesApple: 9c2ece8c6e423b2a13c9c50d2ed25953379cbe4e
   React-oscompat: 34f3d3c06cadcbc470bc4509c717fb9b919eaa8b
   React-perflogger: a1edb025fd5d44f61bf09307e248f7608d7b2dcf
@@ -2638,12 +2701,14 @@ SPEC CHECKSUMS:
   ReactNativeOpenAI: 7911b26df53984eec4fcb5086c1f58a810680bb8
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
   RNCAsyncStorage: b44e8a4e798c3e1f56bffccd0f591f674fb9198f
-  RNFBApp: bea90a62e4c79c2e8dd567db9cd0b622a5bf969c
-  RNFBAuth: e8d4116fadb433df4cb875b7d9f05d53b37c5376
+  RNFBApp: 068fdd2f2f94bc36be7ffaeeeabb9fcf9415f483
+  RNFBAuth: 4415df7d1089124df3e2928e2fa0bcfc67fff53d
   RNFS2: 7ef61bb4ab9d3e5c9952be1b144e7ff8401a3018
+  RNGestureHandler: d10154c46ad6121e9f66b32b43520a2c944b9b4e
+  RNScreens: fc38cc40395f0b1a83c5b4932fa12720063a0c5e
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: be78ddad0c56d06a5e41eaef4bfbbd49b86a4d07
 
-PODFILE CHECKSUM: 4b028f0f0c3cf64c56ad4f6445697858a8d6eb94
+PODFILE CHECKSUM: 809b64bf4be398cdfdddf55768d9556750fa2158
 
 COCOAPODS: 1.16.2

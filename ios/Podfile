@@ -7,6 +7,9 @@ require Pod::Executable.execute_command('node', ['-p',
 
 require 'set'
 
+# Use master repo instead of CDN to avoid HTTP2 framing errors
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 

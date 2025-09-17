@@ -164,6 +164,11 @@ const createGlobalStyles = (theme: Theme) => ({
     alignItems: 'center' as const,
   },
 
+  // ----- Flex -----
+  flex: {
+    flex: 1,
+  },
+
   // ----- content -----
   contentWidth: {
     width: DIMENSIONS.screen.contentWidth,
@@ -235,4 +240,3 @@ const createGlobalStyles = (theme: Theme) => ({
 export const useGlobalStyles = () => {
   return useThemedStyles(createGlobalStyles)
 }
-

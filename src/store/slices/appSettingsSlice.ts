@@ -20,11 +20,14 @@ const appSettingsSlice = createSlice({
     toggleDarkMode: state => {
       state.darkMode = !state.darkMode
     },
-    setLanguage: (state, action: PayloadAction<'en' | 'es'>) => {
+    setLanguage: (state, action: PayloadAction<SupportedLanguage>) => {
       state.language = action.payload
     },
     toggleLanguage: state => {
-      state.language = state.language === 'en' ? 'es' : 'en'
+      state.language =
+        state.language === SupportedLanguage.ENGLISH
+          ? SupportedLanguage.SPANISH
+          : SupportedLanguage.ENGLISH
     },
     setAppVersion: (state, action: PayloadAction<string>) => {
       state.appVersion = action.payload
@@ -33,7 +36,7 @@ const appSettingsSlice = createSlice({
       state,
       action: PayloadAction<{
         darkMode?: boolean
-        language?: 'en' | 'es'
+        language?: SupportedLanguage
         appVersion?: string
       }>,
     ) => {
@@ -49,7 +52,7 @@ const appSettingsSlice = createSlice({
     },
     resetAppSettings: state => {
       state.darkMode = true
-      state.language = 'en'
+      state.language = SupportedLanguage.ENGLISH
       state.appVersion = '1.0.0'
     },
   },

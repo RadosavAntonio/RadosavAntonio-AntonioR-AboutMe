@@ -11,16 +11,23 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import Reactotron from '../../ReactotronConfig'
 
 // ----- Reducer imports -----
+import appSettingsReducer from './slices/appSettingsSlice'
 import sessionReducer from './slices/sessionSlice'
 import userReducer from './slices/userSlice'
 
 // ----- Persist configs -----
+const appSettingsPersistConfig = {
+  key: 'appSettings',
+  storage: AsyncStorage,
+  whitelist: ['darkMode', 'language'],
+}
+
 const rootPersistConfig = {
   key: 'root',
   storage: AsyncStorage,
   version: 1,
   stateReconciler: autoMergeLevel2,
-  whitelist: ['user'],
+  whitelist: ['user', 'appSettings'],
   blacklist: ['session'],
 }
 
@@ -28,6 +35,7 @@ const rootPersistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   session: sessionReducer,
+  appSettings: persistReducer(appSettingsPersistConfig, appSettingsReducer),
 })
 
 export type RootState = ReturnType<typeof rootReducer>

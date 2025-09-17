@@ -2,7 +2,8 @@ import { getApps } from '@react-native-firebase/app'
 import React, { JSX, memo, useEffect } from 'react'
 import { StyleSheet, Text } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
-import PhoneAuth from '../components/auth/phoneAuth'
+import PhoneAuth from '../auth/phoneAuth'
+import ReduxExample from '../ReduxExample'
 
 const AppMainInit = (): JSX.Element => {
   useEffect(() => {
@@ -18,7 +19,7 @@ const AppMainInit = (): JSX.Element => {
 
     // init reactotron
     if (__DEV__) {
-      import('../../ReactotronConfig')
+      import('../../../ReactotronConfig')
     }
   }, [])
 
@@ -27,6 +28,7 @@ const AppMainInit = (): JSX.Element => {
       <SafeAreaView style={styles.container}>
         <Text>Firebase Phone Auth Test</Text>
         <PhoneAuth />
+        <ReduxExample />
       </SafeAreaView>
     </SafeAreaProvider>
   )

@@ -1,4 +1,4 @@
-package com.antonior
+package com.antonioR.aboutMe
 
 import android.app.Application
 import com.facebook.react.PackageList

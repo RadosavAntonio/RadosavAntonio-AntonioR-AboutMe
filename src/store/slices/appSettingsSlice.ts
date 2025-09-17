@@ -6,7 +6,7 @@ import {
 
 const initialState: AppSettingsState = {
   darkMode: true, // Default to dark mode as requested
-  language: SupportedLanguage.EN, // Default to English
+  language: SupportedLanguage.ENGLISH, // Default to English
   appVersion: '1.0.0', // Default version
 }
 

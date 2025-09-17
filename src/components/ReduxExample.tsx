@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
-import { useAppDispatch, useAppSelector } from '../store/hooks/useAppDispatch'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { setCurrentScreen, setCurrentTab } from '../store/slices/sessionSlice'
 import { clearUser, setUser } from '../store/slices/userSlice'
 

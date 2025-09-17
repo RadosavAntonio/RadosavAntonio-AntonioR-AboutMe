@@ -2252,6 +2252,11 @@
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
+"@types/lodash@^4.17.20":
+  version "4.17.20"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.20.tgz#1ca77361d7363432d29f5e55950d9ec1e1c6ea93"
+  integrity sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==
+
 "@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0":
   version "24.3.0"
   resolved "https://registry.npmjs.org/@types/node/-/node-24.3.0.tgz"
@@ -4776,6 +4781,11 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
+libphonenumber-js@1.12.17:
+  version "1.12.17"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.12.17.tgz#ec01c8f1cf123748923746925bdb6f379b0d3f35"
+  integrity sha512-bsxi8FoceAYR/bjHcLYc2ShJ/aVAzo5jaxAYiMHF0BD+NTp47405CGuPNKYpw+lHadN9k/ClFGc9X5vaZswIrA==
+
 lighthouse-logger@^1.0.0:
   version "1.4.2"
   resolved "https://registry.npmjs.org/lighthouse-logger/-/lighthouse-logger-1.4.2.tgz"
@@ -4830,7 +4840,7 @@ lodash.throttle@^4.1.1:
 
 lodash@^4.17.21:
   version "4.17.21"
-  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 log-symbols@^4.1.0:
@@ -5686,6 +5696,11 @@ react-native-config@^1.5.6:
   resolved "https://registry.npmjs.org/react-native-config/-/react-native-config-1.5.6.tgz"
   integrity sha512-UB3LEco0FGGbbGvS+DfH2VmGKiP/y5C2MkmfBmfsIaxHSbM1KOTMKYG7YRf6xFhZbJ/01BedHG7SIny5i7N9BQ==
 
+react-native-country-select@0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-country-select/-/react-native-country-select-0.2.3.tgz#63109c43c5d5499ccfc04c3f16823a295cc4a5b9"
+  integrity sha512-ONEVewh0ovj8QCRyvyvGDLJhlAz3KIFvessoNjlIfmUHgBanU3mV4qrQw0maN9SDKE8/E4+dhi2SDgw5j3LZ+A==
+
 react-native-fs2@^3.3.4:
   version "3.3.4"
   resolved "https://registry.npmjs.org/react-native-fs2/-/react-native-fs2-3.3.4.tgz"
@@ -5704,6 +5719,14 @@ react-native-gesture-handler@^2.28.0:
     "@egjs/hammerjs" "^2.0.17"
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
+
+react-native-international-phone-number@^0.10.6:
+  version "0.10.6"
+  resolved "https://registry.yarnpkg.com/react-native-international-phone-number/-/react-native-international-phone-number-0.10.6.tgz#0ff453b780da6e3c55d7119b2314922564cd8438"
+  integrity sha512-F5Kp/hAbC3rXcuFeBHDdIjPuUBj02dICQdUqxRvKPjnN3WzPWoduEpDr3eqhKk+LbJD5PduXNJiiL2Dw5TR+5Q==
+  dependencies:
+    libphonenumber-js "1.12.17"
+    react-native-country-select "0.2.3"
 
 react-native-is-edge-to-edge@^1.2.1:
   version "1.2.1"

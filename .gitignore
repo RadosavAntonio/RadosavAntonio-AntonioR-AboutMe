@@ -76,6 +76,9 @@ web-build/
 # Flipper
 .flipper/
 
+# Github
+.github/
+
 # Environment variables
 .env
 .env.local

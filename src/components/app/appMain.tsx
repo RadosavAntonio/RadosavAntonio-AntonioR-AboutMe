@@ -1,9 +1,8 @@
 import { getApps } from '@react-native-firebase/app'
 import React, { JSX, memo, useEffect } from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import PhoneAuth from '../auth/phoneAuth'
-import ReduxExample from '../ReduxExample'
 
 const AppMainInit = (): JSX.Element => {
   useEffect(() => {
@@ -26,9 +25,7 @@ const AppMainInit = (): JSX.Element => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text>Firebase Phone Auth Test</Text>
         <PhoneAuth />
-        <ReduxExample />
       </SafeAreaView>
     </SafeAreaProvider>
   )

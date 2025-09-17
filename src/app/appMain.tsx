@@ -1,8 +1,11 @@
 import { getApps } from '@react-native-firebase/app'
 import React, { JSX, memo, useEffect } from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 import PhoneAuth from '../components/auth/phoneAuth'
+import { persistor, store } from '../store/store'
 
 const AppMainInit = (): JSX.Element => {
   useEffect(() => {
@@ -22,13 +25,24 @@ const AppMainInit = (): JSX.Element => {
     }
   }, [])
 
+  const LoadingComponent = () => (
+    <View style={styles.loadingContainer}>
+      <ActivityIndicator size="large" color="#0000ff" />
+      <Text>Loading...</Text>
+    </View>
+  )
+
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <Text>Firebase Phone Auth Test</Text>
-        <PhoneAuth />
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <PersistGate loading={<LoadingComponent />} persistor={persistor}>
+        <SafeAreaProvider>
+          <SafeAreaView style={styles.container}>
+            <Text>Firebase Phone Auth Test</Text>
+            <PhoneAuth />
+          </SafeAreaView>
+        </SafeAreaProvider>
+      </PersistGate>
+    </Provider>
   )
 }
 
@@ -37,5 +51,11 @@ export const AppMain = memo(AppMainInit)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
 })

@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-interface SessionState {
-  currentTab: string | null
-  currentScreen: string | null
-}
+import { SessionState } from '../../types/slices/sessionSlice'
 
 const initialState: SessionState = {
   currentTab: null,

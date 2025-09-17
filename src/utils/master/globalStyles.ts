@@ -1,166 +1,167 @@
 import { StyleSheet } from 'react-native'
 
-import { colors } from '../../assets/colors'
+import { Theme } from '../../contexts/ThemeContext'
+import { useThemedStyles } from '../../hooks/master/useThemedStyles'
 import { DIMENSIONS } from './dimensions'
 
-export const globalStyle = StyleSheet.create({
+const createGlobalStyles = (theme: Theme) => ({
   // ----- TYPOGRAPHY -----
   textDisplay: {
-    color: colors.textInverse,
+    color: theme.colors.textInverse,
     fontSize: DIMENSIONS.typography.display,
-    fontWeight: '700',
+    fontWeight: '700' as const,
     lineHeight: DIMENSIONS.typography.display * 1.2,
   },
 
   textExtraLarge: {
-    color: colors.textInverse,
+    color: theme.colors.textInverse,
     fontSize: DIMENSIONS.typography.xxxl,
-    fontWeight: '600',
+    fontWeight: '600' as const,
     lineHeight: DIMENSIONS.typography.xxxl * 1.3,
   },
 
   textLarge: {
-    color: colors.textInverse,
+    color: theme.colors.textInverse,
     fontSize: DIMENSIONS.typography.xxl,
-    fontWeight: '600',
+    fontWeight: '600' as const,
     lineHeight: DIMENSIONS.typography.xxl * 1.4,
   },
 
   textTitle: {
-    color: colors.textInverse,
+    color: theme.colors.textInverse,
     fontSize: DIMENSIONS.typography.xl,
-    fontWeight: '600',
+    fontWeight: '600' as const,
     lineHeight: DIMENSIONS.typography.xl * 1.4,
   },
 
   textSubtitle: {
-    color: colors.textInverse,
+    color: theme.colors.textInverse,
     fontSize: DIMENSIONS.typography.lg,
-    fontWeight: '500',
+    fontWeight: '500' as const,
     lineHeight: DIMENSIONS.typography.lg * 1.5,
   },
 
   textBody: {
-    color: colors.textInverse,
+    color: theme.colors.textInverse,
     fontSize: DIMENSIONS.typography.base,
-    fontWeight: '400',
+    fontWeight: '400' as const,
     lineHeight: DIMENSIONS.typography.base * 1.5,
   },
 
   textBodyMedium: {
-    color: colors.textInverse,
+    color: theme.colors.textInverse,
     fontSize: DIMENSIONS.typography.md,
-    fontWeight: '400',
+    fontWeight: '400' as const,
     lineHeight: DIMENSIONS.typography.md * 1.5,
   },
 
   textSmall: {
-    color: colors.textInverse,
+    color: theme.colors.textInverse,
     fontSize: DIMENSIONS.typography.sm,
-    fontWeight: '400',
+    fontWeight: '400' as const,
     lineHeight: DIMENSIONS.typography.sm * 1.4,
   },
 
   textExtraSmall: {
-    color: colors.textInverse,
+    color: theme.colors.textInverse,
     fontSize: DIMENSIONS.typography.xs,
-    fontWeight: '400',
+    fontWeight: '400' as const,
     lineHeight: DIMENSIONS.typography.xs * 1.3,
   },
 
   // ----- text setups -----
   textBold: {
-    fontWeight: '800',
+    fontWeight: '800' as const,
   },
 
   textSemiBold: {
-    fontWeight: '600',
+    fontWeight: '600' as const,
   },
 
   textMedium: {
-    fontWeight: '500',
+    fontWeight: '500' as const,
   },
 
   textCenter: {
-    textAlign: 'center',
+    textAlign: 'center' as const,
   },
 
   textLeft: {
-    textAlign: 'left',
+    textAlign: 'left' as const,
   },
 
   textRight: {
-    textAlign: 'right',
+    textAlign: 'right' as const,
   },
 
   // ----- text colors -----
   textPrimary: {
-    color: colors.primary,
+    color: theme.colors.primary,
   },
 
   textSecondary: {
-    color: colors.textSecondary,
+    color: theme.colors.textSecondary,
   },
 
   textError: {
-    color: colors.error,
+    color: theme.colors.error,
   },
 
   textSuccess: {
-    color: colors.tertiary,
+    color: theme.colors.tertiary,
   },
 
   textWarning: {
-    color: colors.accent,
+    color: theme.colors.accent,
   },
 
   textWhite: {
-    color: colors.textInverse,
+    color: theme.colors.textInverse,
   },
 
   textBlack: {
-    color: colors.textPrimary,
+    color: theme.colors.textPrimary,
   },
 
   // ----- Direction -----
   rowSpace: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: 'row' as const,
+    justifyContent: 'space-between' as const,
+    alignItems: 'center' as const,
   },
 
   rowAround: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    flexDirection: 'row' as const,
+    justifyContent: 'space-around' as const,
+    alignItems: 'center' as const,
   },
 
   row: {
-    flexDirection: 'row',
+    flexDirection: 'row' as const,
   },
 
   // ----- Common combinations -----
   centerContent: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'center' as const,
+    alignItems: 'center' as const,
   },
 
   rowCentered: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row' as const,
+    justifyContent: 'center' as const,
+    alignItems: 'center' as const,
   },
 
   rowBetween: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: 'row' as const,
+    justifyContent: 'space-between' as const,
+    alignItems: 'center' as const,
   },
 
   rowStart: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: 'row' as const,
+    justifyContent: 'flex-start' as const,
+    alignItems: 'center' as const,
   },
 
   // ----- content -----
@@ -171,11 +172,11 @@ export const globalStyle = StyleSheet.create({
   // ----- position -----
 
   absolute: {
-    position: 'absolute',
+    position: 'absolute' as const,
   },
 
   relative: {
-    position: 'relative',
+    position: 'relative' as const,
   },
 
   absoluteFill: {
@@ -183,14 +184,14 @@ export const globalStyle = StyleSheet.create({
   },
 
   absoluteTop: {
-    position: 'absolute',
+    position: 'absolute' as const,
     top: 0,
     left: 0,
     right: 0,
   },
 
   absoluteBottom: {
-    position: 'absolute',
+    position: 'absolute' as const,
     bottom: 0,
     left: 0,
     right: 0,
@@ -198,7 +199,7 @@ export const globalStyle = StyleSheet.create({
 
   // ----- shadow -----
   shadowSmall: {
-    shadowColor: colors.shadowLight,
+    shadowColor: theme.colors.shadowLight,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -209,7 +210,7 @@ export const globalStyle = StyleSheet.create({
   },
 
   shadowMedium: {
-    shadowColor: colors.shadowMedium,
+    shadowColor: theme.colors.shadowMedium,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -220,7 +221,7 @@ export const globalStyle = StyleSheet.create({
   },
 
   shadowLarge: {
-    shadowColor: colors.shadowDark,
+    shadowColor: theme.colors.shadowDark,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -228,5 +229,104 @@ export const globalStyle = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 4.65,
     elevation: 8,
+  },
+})
+
+export const useGlobalStyles = () => {
+  return useThemedStyles(createGlobalStyles)
+}
+
+export const globalStyle = StyleSheet.create({
+  // ----- text setups -----
+  textBold: {
+    fontWeight: '800' as const,
+  },
+
+  textSemiBold: {
+    fontWeight: '600' as const,
+  },
+
+  textMedium: {
+    fontWeight: '500' as const,
+  },
+
+  textCenter: {
+    textAlign: 'center' as const,
+  },
+
+  textLeft: {
+    textAlign: 'left' as const,
+  },
+
+  textRight: {
+    textAlign: 'right' as const,
+  },
+
+  // ----- Direction -----
+  rowSpace: {
+    flexDirection: 'row' as const,
+    justifyContent: 'space-between' as const,
+    alignItems: 'center' as const,
+  },
+
+  rowAround: {
+    flexDirection: 'row' as const,
+    justifyContent: 'space-around' as const,
+    alignItems: 'center' as const,
+  },
+
+  row: {
+    flexDirection: 'row' as const,
+  },
+
+  // ----- Common combinations -----
+  centerContent: {
+    justifyContent: 'center' as const,
+    alignItems: 'center' as const,
+  },
+
+  rowCentered: {
+    flexDirection: 'row' as const,
+    justifyContent: 'center' as const,
+    alignItems: 'center' as const,
+  },
+
+  rowBetween: {
+    flexDirection: 'row' as const,
+    justifyContent: 'space-between' as const,
+    alignItems: 'center' as const,
+  },
+
+  rowStart: {
+    flexDirection: 'row' as const,
+    justifyContent: 'flex-start' as const,
+    alignItems: 'center' as const,
+  },
+
+  // ----- position -----
+  absolute: {
+    position: 'absolute' as const,
+  },
+
+  relative: {
+    position: 'relative' as const,
+  },
+
+  absoluteFill: {
+    ...StyleSheet.absoluteFillObject,
+  },
+
+  absoluteTop: {
+    position: 'absolute' as const,
+    top: 0,
+    left: 0,
+    right: 0,
+  },
+
+  absoluteBottom: {
+    position: 'absolute' as const,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 })

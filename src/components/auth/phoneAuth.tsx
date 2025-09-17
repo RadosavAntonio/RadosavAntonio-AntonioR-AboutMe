@@ -1,146 +1,45 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
   ActivityIndicator,
-  Alert,
   KeyboardAvoidingView,
   Platform,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native'
 import PhoneNumberInput from 'react-native-international-phone-number'
-import { FirebaseService } from '../../services/firebaseService'
+import { usePhoneAuthTranslations } from '../../contexts/LanguageContext'
+import { Theme } from '../../contexts/ThemeContext'
+import { usePhoneAuth } from '../../hooks/login/usePhoneAuth'
+import { useThemedStyles } from '../../hooks/master/useThemedStyles'
+import { useGlobalStyles } from '../../utils/master/globalStyles'
 
 interface PhoneAuthProps {}
 
 function PhoneAuth({}: PhoneAuthProps) {
-  const [selectedCountry, setSelectedCountry] = useState<any>(null)
-  const [inputValue, setInputValue] = useState('')
-  const [fullPhoneNumber, setFullPhoneNumber] = useState('')
-  const [confirmation, setConfirmation] = useState<any>(null)
-  const [verificationCode, setVerificationCode] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  // Use the custom phone auth hook
+  const {
+    selectedCountry,
+    inputValue,
+    fullPhoneNumber,
+    confirmation,
+    verificationCode,
+    loading,
+    error,
+    handleInputValue,
+    handleSelectedCountry,
+    handlePhoneNumberChange,
+    setVerificationCode,
+    sendVerificationCode,
+    confirmVerificationCode,
+    resetForm,
+  } = usePhoneAuth()
 
-  useEffect(() => {
-    // Listen for auth state changes
-    const unsubscribe = FirebaseService.onAuthStateChanged(user => {
-      if (user) {
-        console.log('User signed in successfully:', user.phoneNumber)
-        // You can navigate to the main app or update your Redux store here
-      }
-    })
-
-    return unsubscribe
-  }, [])
-
-  const handleInputValue = (phoneNumber: string) => {
-    setInputValue(phoneNumber)
-    setError('')
-  }
-
-  const handleSelectedCountry = (country: any) => {
-    setSelectedCountry(country)
-    setError('')
-  }
-
-  const handlePhoneNumberChange = (phoneNumber: string) => {
-    setFullPhoneNumber(phoneNumber)
-    setError('') // Clear any previous errors when phone number changes
-  }
-
-  const validatePhoneNumber = (phoneNumber: string) => {
-    // Basic validation - check if it starts with + and has at least 10 digits
-    const phoneRegex = /^\+[1-9]\d{9,14}$/
-    return phoneRegex.test(phoneNumber)
-  }
-
-  const sendVerificationCode = async () => {
-    if (!fullPhoneNumber) {
-      setError('Please enter a phone number')
-      return
-    }
-
-    if (!validatePhoneNumber(fullPhoneNumber)) {
-      setError('Please enter a valid phone number with country code')
-      return
-    }
-
-    try {
-      setLoading(true)
-      setError('')
-
-      console.log('Sending verification code to:', fullPhoneNumber)
-      const result = (await FirebaseService.sendPhoneVerificationCode(
-        fullPhoneNumber,
-      )) as any
-
-      if (result.success) {
-        setConfirmation(result.confirmation)
-        Alert.alert(
-          'Verification Code Sent',
-          `A verification code has been sent to ${fullPhoneNumber}`,
-        )
-      } else {
-        setError(result.error || 'Failed to send verification code')
-        Alert.alert('Error', result.error || 'Failed to send verification code')
-      }
-    } catch (err: any) {
-      console.error('Send verification code error:', err)
-      setError('Failed to send verification code')
-      Alert.alert('Error', 'Failed to send verification code')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const confirmVerificationCode = async () => {
-    if (!verificationCode.trim()) {
-      setError('Please enter the verification code')
-      return
-    }
-
-    if (!confirmation) {
-      setError('No verification session found. Please try again.')
-      return
-    }
-
-    try {
-      setLoading(true)
-      setError('')
-
-      const result = (await FirebaseService.verifyPhoneNumber(
-        confirmation,
-        verificationCode,
-      )) as any
-
-      if (result.success) {
-        Alert.alert('Success', 'Phone number verified successfully!')
-        // Reset the form
-        setConfirmation(null)
-        setVerificationCode('')
-        setInputValue('')
-        setFullPhoneNumber('')
-      } else {
-        setError(result.error || 'Invalid verification code')
-        Alert.alert('Error', result.error || 'Invalid verification code')
-      }
-    } catch (err: any) {
-      console.error('Confirm verification code error:', err)
-      setError('Invalid verification code')
-      Alert.alert('Error', 'Invalid verification code')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const resetForm = () => {
-    setConfirmation(null)
-    setVerificationCode('')
-    setError('')
-  }
+  // Use themed styles, global styles, and translations
+  const styles = useThemedStyles(createStyles)
+  const globalStyles = useGlobalStyles()
+  const t = usePhoneAuthTranslations()
 
   // Show verification code input if we have a confirmation
   if (confirmation) {
@@ -149,37 +48,76 @@ function PhoneAuth({}: PhoneAuthProps) {
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View style={styles.content}>
-          <Text style={styles.title}>Enter Verification Code</Text>
-          <Text style={styles.subtitle}>
-            We've sent a verification code to {fullPhoneNumber}
-          </Text>
+          <View style={[styles.headerSection, globalStyles.centerContent]}>
+            <Text style={[globalStyles.textTitle, styles.titleSpacing]}>
+              {t.enterVerificationCode}
+            </Text>
+            <Text
+              style={[
+                globalStyles.textBody,
+                globalStyles.textSecondary,
+                styles.subtitleSpacing,
+              ]}>
+              {t.verificationCodeSubtitle} {fullPhoneNumber}
+            </Text>
+          </View>
 
-          <TextInput
-            style={styles.codeInput}
-            value={verificationCode}
-            onChangeText={setVerificationCode}
-            placeholder="Enter 6-digit code"
-            keyboardType="number-pad"
-            maxLength={6}
-            editable={!loading}
-          />
+          <View style={styles.inputSection}>
+            <TextInput
+              style={[
+                styles.codeInput,
+                globalStyles.textCenter,
+                globalStyles.shadowSmall,
+              ]}
+              value={verificationCode}
+              onChangeText={setVerificationCode}
+              placeholder={t.codeInputPlaceholder}
+              placeholderTextColor={globalStyles.textSecondary.color}
+              keyboardType="number-pad"
+              maxLength={6}
+              editable={!loading}
+            />
 
-          {error ? <Text style={styles.errorText}>{error}</Text> : null}
+            {error ? (
+              <Text
+                style={[
+                  globalStyles.textError,
+                  globalStyles.textCenter,
+                  styles.errorSpacing,
+                ]}>
+                {error}
+              </Text>
+            ) : null}
+          </View>
 
-          <TouchableOpacity
-            style={[styles.button, loading && styles.buttonDisabled]}
-            onPress={confirmVerificationCode}
-            disabled={loading}>
-            {loading ? (
-              <ActivityIndicator color="#FFFFFF" />
-            ) : (
-              <Text style={styles.buttonText}>Verify Code</Text>
-            )}
-          </TouchableOpacity>
+          <View style={styles.buttonSection}>
+            <TouchableOpacity
+              style={[
+                styles.primaryButton,
+                globalStyles.shadowMedium,
+                loading && styles.buttonDisabled,
+              ]}
+              onPress={confirmVerificationCode}
+              disabled={loading}>
+              {loading ? (
+                <ActivityIndicator color="#FFFFFF" size="small" />
+              ) : (
+                <Text
+                  style={[globalStyles.textSemiBold, styles.primaryButtonText]}>
+                  {t.verifyCode}
+                </Text>
+              )}
+            </TouchableOpacity>
 
-          <TouchableOpacity style={styles.secondaryButton} onPress={resetForm}>
-            <Text style={styles.secondaryButtonText}>Back to Phone Number</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.secondaryButton, globalStyles.centerContent]}
+              onPress={resetForm}>
+              <Text
+                style={[globalStyles.textMedium, styles.secondaryButtonText]}>
+                {t.backToPhoneNumber}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </KeyboardAvoidingView>
     )
@@ -191,103 +129,217 @@ function PhoneAuth({}: PhoneAuthProps) {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <View style={styles.content}>
-        <Text style={styles.title}>Sign In</Text>
-        <Text style={styles.subtitle}>
-          Enter your phone number to get started
-        </Text>
-
-        <View style={styles.phoneInputContainer}>
-          <PhoneNumberInput
-            value={inputValue}
-            onChangePhoneNumber={handlePhoneNumberChange}
-            selectedCountry={selectedCountry}
-            onChangeSelectedCountry={handleSelectedCountry}
-            onChangeText={handleInputValue}
-            placeholder="Phone number"
-            style={styles.phoneInputStyle}
-          />
+        <View style={[styles.headerSection, globalStyles.centerContent]}>
+          <Text style={[globalStyles.textTitle, styles.titleSpacing]}>
+            {t.signIn}
+          </Text>
+          <Text
+            style={[
+              globalStyles.textBody,
+              globalStyles.textSecondary,
+              styles.subtitleSpacing,
+            ]}>
+            {t.signInSubtitle}
+          </Text>
         </View>
 
-        {error ? <Text style={styles.errorText}>{error}</Text> : null}
+        <View style={styles.inputSection}>
+          <View style={[styles.phoneInputContainer, globalStyles.shadowSmall]}>
+            <PhoneNumberInput
+              value={inputValue}
+              onChangePhoneNumber={handlePhoneNumberChange}
+              selectedCountry={selectedCountry}
+              onChangeSelectedCountry={handleSelectedCountry}
+              onChangeText={handleInputValue}
+              placeholder={t.phoneNumberPlaceholder}
+              style={styles.phoneInputStyle}
+            />
+          </View>
 
-        <TouchableOpacity
-          style={[
-            styles.button,
-            (!fullPhoneNumber || loading) && styles.buttonDisabled,
-          ]}
-          onPress={sendVerificationCode}
-          disabled={!fullPhoneNumber || loading}>
-          {loading ? (
-            <ActivityIndicator color="#FFFFFF" />
-          ) : (
-            <Text style={styles.buttonText}>Send Verification Code</Text>
-          )}
-        </TouchableOpacity>
+          {error ? (
+            <Text
+              style={[
+                globalStyles.textError,
+                globalStyles.textCenter,
+                styles.errorSpacing,
+              ]}>
+              {error}
+            </Text>
+          ) : null}
+        </View>
 
-        <Text style={styles.disclaimer}>
-          By continuing, you agree to receive SMS messages for verification.
-          Standard rates may apply.
-        </Text>
+        <View style={styles.buttonSection}>
+          <TouchableOpacity
+            style={[
+              styles.primaryButton,
+              globalStyles.shadowMedium,
+              (!fullPhoneNumber || loading) && styles.buttonDisabled,
+            ]}
+            onPress={sendVerificationCode}
+            disabled={!fullPhoneNumber || loading}>
+            {loading ? (
+              <ActivityIndicator color="#FFFFFF" size="small" />
+            ) : (
+              <Text
+                style={[globalStyles.textSemiBold, styles.primaryButtonText]}>
+                {t.sendVerificationCode}
+              </Text>
+            )}
+          </TouchableOpacity>
+
+          <View style={[styles.disclaimerContainer, globalStyles.shadowSmall]}>
+            <Text style={[globalStyles.textExtraSmall, styles.disclaimerText]}>
+              {t.disclaimer}
+            </Text>
+          </View>
+        </View>
       </View>
     </KeyboardAvoidingView>
   )
 }
 
-const styles = StyleSheet.create({
+// ----- Improved Themed Styles with Global Style Integration -----
+const createStyles = (theme: Theme) => ({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: theme.colors.background,
   },
   content: {
     flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 60,
+    paddingTop: 40,
     paddingBottom: 40,
+    justifyContent: 'space-between' as const,
   },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
+
+  // ----- Section Layouts -----
+  headerSection: {
+    flex: 1,
+    justifyContent: 'center' as const,
+    minHeight: 120,
+  },
+  inputSection: {
+    flex: 2,
+    justifyContent: 'center' as const,
+    paddingVertical: 20,
+  },
+  buttonSection: {
+    flex: 1,
+    justifyContent: 'flex-end' as const,
+    minHeight: 140,
+  },
+
+  // ----- Spacing Utilities -----
+  titleSpacing: {
+    marginBottom: 12,
+  },
+  subtitleSpacing: {
+    marginBottom: 24,
+    paddingHorizontal: 16,
+  },
+  errorSpacing: {
+    marginTop: 12,
     marginBottom: 8,
-    textAlign: 'center',
   },
-  subtitle: {
-    fontSize: 16,
-    color: '#666666',
-    marginBottom: 40,
-    textAlign: 'center',
-    lineHeight: 22,
-  },
+
+  // ----- Input Styles -----
   phoneInputContainer: {
-    marginBottom: 20,
+    marginBottom: 24,
+    borderRadius: 16,
+    overflow: 'hidden' as const,
   },
   phoneInputStyle: {
     borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#FAFAFA',
+    borderColor: theme.colors.textTertiary,
+    borderRadius: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    backgroundColor: theme.colors.surface,
+    fontSize: 16,
+    color: theme.colors.textPrimary,
   },
   codeInput: {
     borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    borderColor: theme.colors.primary,
+    borderRadius: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    fontSize: 24,
+    backgroundColor: theme.colors.surface,
+    marginBottom: 24,
+    letterSpacing: 12,
+    color: theme.colors.textPrimary,
+    fontWeight: '600' as const,
+  },
+
+  // ----- Button Styles -----
+  primaryButton: {
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 18,
+    paddingHorizontal: 24,
+    borderRadius: 16,
+    alignItems: 'center' as const,
+    marginBottom: 24,
+    minHeight: 56,
+    justifyContent: 'center' as const,
+  },
+  primaryButtonText: {
+    color: theme.colors.textOnPrimary,
     fontSize: 18,
-    textAlign: 'center',
-    backgroundColor: '#FAFAFA',
-    marginBottom: 20,
-    letterSpacing: 8,
+  },
+  buttonDisabled: {
+    backgroundColor: theme.colors.textTertiary,
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+  secondaryButton: {
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+    marginTop: 8,
+  },
+  secondaryButtonText: {
+    color: theme.colors.primary,
+    fontSize: 16,
+    textAlign: 'center' as const,
+  },
+
+  // ----- Disclaimer Section -----
+  disclaimerContainer: {
+    backgroundColor: theme.colors.accent,
+    borderRadius: 12,
+    padding: 16,
+    marginTop: 16,
+  },
+  disclaimerText: {
+    color: theme.colors.textOnAccent,
+    textAlign: 'center' as const,
+    lineHeight: 18,
+  },
+
+  // ----- Legacy styles for backward compatibility -----
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold' as const,
+    color: theme.colors.textPrimary,
+    marginBottom: 12,
+    textAlign: 'center' as const,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: theme.colors.textSecondary,
+    marginBottom: 32,
+    textAlign: 'center' as const,
+    lineHeight: 24,
+    paddingHorizontal: 16,
   },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: theme.colors.primary,
     paddingVertical: 16,
     borderRadius: 12,
-    alignItems: 'center',
+    alignItems: 'center' as const,
     marginBottom: 16,
-    shadowColor: '#007AFF',
+    shadowColor: theme.colors.shadowPrimary,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -296,37 +348,22 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
-  buttonDisabled: {
-    backgroundColor: '#CCCCCC',
-    shadowOpacity: 0,
-    elevation: 0,
-  },
   buttonText: {
-    color: '#FFFFFF',
+    color: theme.colors.textOnPrimary,
     fontSize: 16,
-    fontWeight: '600',
-  },
-  secondaryButton: {
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  secondaryButtonText: {
-    color: '#007AFF',
-    fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '600' as const,
   },
   errorText: {
-    color: '#FF3B30',
+    color: theme.colors.error,
     fontSize: 14,
     marginBottom: 16,
-    textAlign: 'center',
+    textAlign: 'center' as const,
   },
   disclaimer: {
     fontSize: 12,
-    color: '#999999',
-    textAlign: 'center',
+    color: theme.colors.textOnAccent,
+    textAlign: 'center' as const,
     lineHeight: 16,
-    marginTop: 20,
   },
 })
 

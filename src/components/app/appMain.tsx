@@ -1,8 +1,12 @@
 import { getApps } from '@react-native-firebase/app'
 import React, { JSX, memo, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { LanguageProvider } from '../../contexts/LanguageContext'
+import { ThemeProvider } from '../../contexts/ThemeContext'
 import PhoneAuth from '../auth/phoneAuth'
+import { FloatingLanguageToggle } from './FloatingLanguageToggle'
+import { FloatingThemeToggle } from './FloatingThemeToggle'
 
 const AppMainInit = (): JSX.Element => {
   useEffect(() => {
@@ -23,11 +27,15 @@ const AppMainInit = (): JSX.Element => {
   }, [])
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <PhoneAuth />
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <SafeAreaView style={styles.container}>
+      <LanguageProvider>
+        <ThemeProvider>
+          <PhoneAuth />
+          <FloatingLanguageToggle />
+          <FloatingThemeToggle />
+        </ThemeProvider>
+      </LanguageProvider>
+    </SafeAreaView>
   )
 }
 

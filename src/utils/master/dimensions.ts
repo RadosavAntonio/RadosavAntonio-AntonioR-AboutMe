@@ -1,4 +1,3 @@
-import { BORDER_RADIUS, SCREEN_MARGIN_HORIZONTAL } from './constants'
 import {
   getSize,
   getWidthByRatio,
@@ -6,11 +5,8 @@ import {
   getWindowWidth,
 } from './globalUtilityFunctionsAndConstants'
 
-/**
- * Comprehensive dimension system for consistent spacing and sizing
- * throughout the application. All values are responsive and scale
- * based on screen size.
- */
+export const SCREEN_MARGIN_HORIZONTAL = getSize(12)
+
 export const DIMENSIONS = {
   // ----- SCREEN DIMENSIONS -----
   screen: {
@@ -22,27 +18,27 @@ export const DIMENSIONS = {
 
   // ----- SPACING SCALE -----
   spacing: {
-    xs: getSize(4), // 4px base
-    sm: getSize(8), // 8px base
-    md: getSize(12), // 12px base
-    lg: getSize(16), // 16px base
-    xl: getSize(24), // 24px base
-    xxl: getSize(32), // 32px base
-    xxxl: getSize(48), // 48px base
-    xxxxl: getSize(64), // 64px base
+    [4]: getSize(4), // 4px base
+    [8]: getSize(8), // 8px base
+    [12]: getSize(12), // 12px base
+    [16]: getSize(16), // 16px base
+    [24]: getSize(24), // 24px base
+    [32]: getSize(32), // 32px base
+    [48]: getSize(48), // 48px base
+    [64]: getSize(64), // 64px base
   },
 
   // ----- TYPOGRAPHY SCALE -----
   typography: {
-    xs: getSize(10), // Caption, labels
-    sm: getSize(12), // Small text, metadata
-    base: getSize(14), // Body text
-    md: getSize(16), // Larger body text
-    lg: getSize(18), // Subheadings
-    xl: getSize(20), // Small titles
-    xxl: getSize(24), // Titles
-    xxxl: getSize(32), // Large titles
-    display: getSize(40), // Hero text
+    [10]: getSize(10), // Caption, labels
+    [12]: getSize(12), // Small text, metadata
+    [14]: getSize(14), // Body text
+    [16]: getSize(16), // Larger body text
+    [18]: getSize(18), // Subheadings
+    [20]: getSize(20), // Small titles
+    [24]: getSize(24), // Titles
+    [32]: getSize(32), // Large titles
+    [40]: getSize(40), // Hero text
 
     // ----- Line height multipliers -----
     lineHeight: {
@@ -54,46 +50,23 @@ export const DIMENSIONS = {
 
   // ----- ICON SIZES -----
   icons: {
-    xs: getSize(12), // Small inline icons
-    sm: getSize(16), // Standard icons
-    md: getSize(20), // Medium icons
-    lg: getSize(24), // Large icons
-    xl: getSize(32), // Extra large icons
-    xxl: getSize(48), // Hero icons
-    xxxl: getSize(64), // Oversized icons
-  },
-
-  // ----- TOUCH TARGETS -----
-  touchTargets: {
-    min: getSize(44), // iOS minimum (44px)
-    small: getSize(48), // Small buttons
-    medium: getSize(56), // Standard buttons
-    large: getSize(64), // Large buttons
-    hero: getSize(80), // Hero buttons
+    [12]: getSize(12), // Small inline icons
+    [16]: getSize(16), // Standard icons
+    [20]: getSize(20), // Medium icons
+    [24]: getSize(24), // Large icons
+    [32]: getSize(32), // Extra large icons
+    [48]: getSize(48), // Hero icons
+    [64]: getSize(64), // Oversized icons
   },
 
   // ----- COMPONENT DIMENSIONS -----
   components: {
     // ----- Buttons -----
     button: {
-      small: getSize(32),
-      medium: getSize(48),
-      large: getSize(56),
-      hero: getSize(64),
-    },
-
-    // ----- Inputs -----
-    input: {
-      small: getSize(40),
-      medium: getSize(48),
-      large: getSize(56),
-    },
-
-    // ----- Cards and containers -----
-    card: {
-      small: getSize(80),
-      medium: getSize(120),
-      large: getSize(160),
+      [32]: getSize(32),
+      [48]: getSize(48),
+      [56]: getSize(56),
+      [64]: getSize(64),
     },
 
     // ----- Navigation -----
@@ -106,17 +79,17 @@ export const DIMENSIONS = {
 
     // ----- Avatar sizes -----
     avatar: {
-      xs: getSize(24),
-      sm: getSize(32),
-      md: getSize(48),
-      lg: getSize(64),
-      xl: getSize(96),
-      xxl: getSize(128),
+      [24]: getSize(24),
+      [32]: getSize(32),
+      [48]: getSize(48),
+      [64]: getSize(64),
+      [96]: getSize(96),
+      [128]: getSize(128),
     },
 
     // ----- Modal dimensions -----
     modal: {
-      borderRadius: BORDER_RADIUS[20],
+      borderRadius: 13,
       padding: getSize(24),
       margin: getSize(16),
     },
@@ -124,13 +97,12 @@ export const DIMENSIONS = {
 
   // ----- BORDER RADIUS -----
   borderRadius: {
-    none: 0,
-    xs: BORDER_RADIUS[10],
-    sm: BORDER_RADIUS[13],
-    md: BORDER_RADIUS[20],
-    lg: BORDER_RADIUS[25],
-    xl: BORDER_RADIUS[40],
-    circle: BORDER_RADIUS.circle,
+    [0]: 0,
+    [10]: 10,
+    [13]: 13,
+    [20]: 20,
+    [25]: 25,
+    circle: 1000,
   },
 
   // ----- ELEVATION/SHADOW LEVELS -----

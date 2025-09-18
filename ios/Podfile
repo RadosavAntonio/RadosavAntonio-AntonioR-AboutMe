@@ -13,9 +13,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
-# Disable New Architecture to avoid llama-rn codegen issues
-ENV['RCT_NEW_ARCH_ENABLED'] = '0'
-
 # Use dynamic frameworks to avoid llama.rn conflicts
 # Firebase 22+ works with dynamic linking
 use_frameworks! :linkage => :dynamic

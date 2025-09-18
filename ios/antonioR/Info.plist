@@ -55,7 +55,7 @@
 	<key>PROJECT_ID</key>
 	<string>antonior-aboutme</string>
 	<key>RCTNewArchEnabled</key>
-	<false/>
+	<true/>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.247234622903-6ca1pfmr35gh3rttaabprghp606ecj5u</string>
 	<key>UIBackgroundModes</key>

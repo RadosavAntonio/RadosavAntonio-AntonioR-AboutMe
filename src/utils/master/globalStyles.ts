@@ -8,65 +8,65 @@ const createGlobalStyles = (theme: Theme) => ({
   // ----- TYPOGRAPHY -----
   textDisplay: {
     color: theme.colors.textInverse,
-    fontSize: DIMENSIONS.typography.display,
+    fontSize: DIMENSIONS.typography[40],
     fontWeight: '700' as const,
-    lineHeight: DIMENSIONS.typography.display * 1.2,
+    lineHeight: DIMENSIONS.typography[40] * 1.2,
   },
 
   textExtraLarge: {
     color: theme.colors.textInverse,
-    fontSize: DIMENSIONS.typography.xxxl,
+    fontSize: DIMENSIONS.typography[32],
     fontWeight: '600' as const,
-    lineHeight: DIMENSIONS.typography.xxxl * 1.3,
+    lineHeight: DIMENSIONS.typography[32] * 1.3,
   },
 
   textLarge: {
     color: theme.colors.textInverse,
-    fontSize: DIMENSIONS.typography.xxl,
+    fontSize: DIMENSIONS.typography[24],
     fontWeight: '600' as const,
-    lineHeight: DIMENSIONS.typography.xxl * 1.4,
+    lineHeight: DIMENSIONS.typography[24] * 1.4,
   },
 
   textTitle: {
     color: theme.colors.textInverse,
-    fontSize: DIMENSIONS.typography.xl,
+    fontSize: DIMENSIONS.typography[20],
     fontWeight: '600' as const,
-    lineHeight: DIMENSIONS.typography.xl * 1.4,
+    lineHeight: DIMENSIONS.typography[20] * 1.4,
   },
 
   textSubtitle: {
     color: theme.colors.textInverse,
-    fontSize: DIMENSIONS.typography.lg,
+    fontSize: DIMENSIONS.typography[18],
     fontWeight: '500' as const,
-    lineHeight: DIMENSIONS.typography.lg * 1.5,
+    lineHeight: DIMENSIONS.typography[18] * 1.5,
   },
 
   textBody: {
     color: theme.colors.textInverse,
-    fontSize: DIMENSIONS.typography.base,
+    fontSize: DIMENSIONS.typography[14],
     fontWeight: '400' as const,
-    lineHeight: DIMENSIONS.typography.base * 1.5,
+    lineHeight: DIMENSIONS.typography[14] * 1.5,
   },
 
   textBodyMedium: {
     color: theme.colors.textInverse,
-    fontSize: DIMENSIONS.typography.md,
+    fontSize: DIMENSIONS.typography[16],
     fontWeight: '400' as const,
-    lineHeight: DIMENSIONS.typography.md * 1.5,
+    lineHeight: DIMENSIONS.typography[16] * 1.5,
   },
 
   textSmall: {
     color: theme.colors.textInverse,
-    fontSize: DIMENSIONS.typography.sm,
+    fontSize: DIMENSIONS.typography[12],
     fontWeight: '400' as const,
-    lineHeight: DIMENSIONS.typography.sm * 1.4,
+    lineHeight: DIMENSIONS.typography[12] * 1.4,
   },
 
   textExtraSmall: {
     color: theme.colors.textInverse,
-    fontSize: DIMENSIONS.typography.xs,
+    fontSize: DIMENSIONS.typography[10],
     fontWeight: '400' as const,
-    lineHeight: DIMENSIONS.typography.xs * 1.3,
+    lineHeight: DIMENSIONS.typography[10] * 1.3,
   },
 
   // ----- text setups -----

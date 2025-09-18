@@ -1,6 +1,7 @@
 import React, { JSX, memo } from 'react'
 import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { KeyboardProvider } from '../../contexts/KeyboardContext'
 import { LanguageProvider } from '../../contexts/LanguageContext'
 import { ThemeProvider } from '../../contexts/ThemeContext'
 import { useInitialServices } from '../../hooks/master/useInitalServices'
@@ -15,9 +16,11 @@ const AppMainInit = (): JSX.Element => {
     <SafeAreaView style={styles.container}>
       <LanguageProvider>
         <ThemeProvider>
-          <PhoneAuth />
-          <FloatingLanguageToggle />
-          <FloatingThemeToggle />
+          <KeyboardProvider>
+            <PhoneAuth />
+            <FloatingLanguageToggle />
+            <FloatingThemeToggle />
+          </KeyboardProvider>
         </ThemeProvider>
       </LanguageProvider>
     </SafeAreaView>

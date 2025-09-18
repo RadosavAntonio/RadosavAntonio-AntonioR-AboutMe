@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import {
   ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native'
 import PhoneNumberInput from 'react-native-international-phone-number'
+import { KeyboardWrapper, useKeyboard } from '../../contexts/KeyboardContext'
 import { usePhoneAuthTranslations } from '../../contexts/LanguageContext'
 import { Theme } from '../../contexts/ThemeContext'
 import { usePhoneAuth } from '../../hooks/login/usePhoneAuth'
@@ -36,6 +35,23 @@ function PhoneAuth({}: PhoneAuthProps) {
     resetForm,
   } = usePhoneAuth()
 
+  // Use keyboard context for better input handling
+  const { registerInput, handleSubmitEditing } = useKeyboard()
+
+  // Input ref for code input only
+  const codeInputRef = useRef<TextInput>(null)
+
+  // Register inputs when component mounts
+  useEffect(() => {
+    if (confirmation && codeInputRef.current) {
+      registerInput(codeInputRef.current, 0)
+      // Auto-focus the code input when it appears
+      setTimeout(() => {
+        codeInputRef.current?.focus()
+      }, 100)
+    }
+  }, [confirmation, registerInput])
+
   // Use themed styles, global styles, and translations
   const styles = useThemedStyles(createStyles)
   const globalStyles = useGlobalStyles()
@@ -44,9 +60,7 @@ function PhoneAuth({}: PhoneAuthProps) {
   // Show verification code input if we have a confirmation
   if (confirmation) {
     return (
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <KeyboardWrapper>
         <View style={styles.content}>
           <View style={[styles.headerSection, globalStyles.centerContent]}>
             <Text style={[globalStyles.textTitle, styles.titleSpacing]}>
@@ -64,6 +78,7 @@ function PhoneAuth({}: PhoneAuthProps) {
 
           <View style={styles.inputSection}>
             <TextInput
+              ref={codeInputRef}
               style={[
                 styles.codeInput,
                 globalStyles.textCenter,
@@ -76,6 +91,8 @@ function PhoneAuth({}: PhoneAuthProps) {
               keyboardType="number-pad"
               maxLength={6}
               editable={!loading}
+              returnKeyType="done"
+              onSubmitEditing={() => handleSubmitEditing(0, 1)}
             />
 
             {error ? (
@@ -119,15 +136,13 @@ function PhoneAuth({}: PhoneAuthProps) {
             </TouchableOpacity>
           </View>
         </View>
-      </KeyboardAvoidingView>
+      </KeyboardWrapper>
     )
   }
 
   // Show phone number input
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <KeyboardWrapper>
       <View style={styles.content}>
         <View style={[styles.headerSection, globalStyles.centerContent]}>
           <Text style={[globalStyles.textTitle, styles.titleSpacing]}>
@@ -194,16 +209,12 @@ function PhoneAuth({}: PhoneAuthProps) {
           </View>
         </View>
       </View>
-    </KeyboardAvoidingView>
+    </KeyboardWrapper>
   )
 }
 
 // ----- Improved Themed Styles with Global Style Integration -----
 const createStyles = (theme: Theme) => ({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
   content: {
     flex: 1,
     paddingHorizontal: 24,

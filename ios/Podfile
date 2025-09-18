@@ -17,7 +17,9 @@ prepare_react_native_project!
 ENV['RCT_NEW_ARCH_ENABLED'] = '0'
 
 # Use dynamic frameworks to avoid llama.rn conflicts
+# Firebase 22+ works with dynamic linking
 use_frameworks! :linkage => :dynamic
+
 
 # Force static frameworks only for Firebase
 $RNFirebaseAsStaticFramework = true
